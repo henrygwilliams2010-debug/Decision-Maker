@@ -1,2 +1,2 @@
 # Decision-Maker
-Decusuin Maker
+This App is a coin flip program. This Code was written in CMU CS Academy and requires their specific Built In functions and CMU Graphics. You must either import these things or run the program withing CMU. Run the Program and then press the begin button to start the app. The coin will appear along with the buttons 'Flip' and 'Flip 10x' Click these buttons to flip the coin and the table in the top right will keep the score. You can adjust the code to change to amount of coin flips are done with the functi Multiflip by calling it with any number i.e Multiflip(20).
