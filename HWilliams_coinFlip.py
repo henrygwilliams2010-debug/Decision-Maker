@@ -5,19 +5,12 @@ Coin = Group(
     Circle(200, 200, 70, fill =None, border ='lightgray', dashes =True),
     Circle(200, 200, 65, fill =None, border ='lightgray'), visible = False
     )
- 
+GameOn = False
     
-Coin2 = Group(
-    Oval(200, 200, 70, 50, fill = 'gray'),
-    Oval(200, 200, 65,50, fill='darkgray'),
-    Oval(200, 200, 70,50, fill =None, border ='lightGray', dashes =True),
-    Oval(200, 200, 65, 50, fill =None, border ='lightgray'), visible = False
-    )
-#app.Head=(Circle(200,200, 30, fill='lightgray')), Polygon(174,200, 168,246,188,249,205,250,218,250,214,241,218,223,fill='lightgray'), 
-#Polygon(240, 214,230,215,234,198, fill='lightgray'),Polygon(218,223,227,222,230,215, fill='lightgray'), Polygon(234,198, 217,198, 218,223,230,215,fill='lightgray')
-#Polygon(233,198,233,185,222,185, fill ='lightgray'), Circle(216,183,17, fill='lightgray'), Circle(200,190, 30, fill='lightgray'),
-#Polygon(163,238,158,232,170,200,180,204, fill='lightgray'), 
-Button = Group(Rect(150, 300, 100, 50, fill='yellow'), Label('Flip',200,325),visible=False)
+
+
+Button = Group(Rect(150, 300, 100, 35, fill='yellow'), Label('Flip',200,317),visible=False)
+MultiButton = Group(Rect(150, 350, 100, 35, fill='yellow'), Label('Flip 10x',200,367),visible=False)
 app.Begin = Group(Rect(150, 300, 100, 50, fill='yellow'), Label('Begin',200,325),)
 Title =Label('Decision Maker', 200, 83, size = 50)
 Rect(0,0,400,400, fill=None, border='Black')
@@ -36,16 +29,12 @@ Tails=Label('Tails', 200, 200, size = 30, visible=False)
 
 def onMousePress(mouseX,mouseY):
     if(app.Begin.hits(mouseX,mouseY)):
-        Coin.visible=True
-        Button.visible=True
-        Tally.visible = True
-        NumberHeads.visible = True
-        NumberTails.visible=True
-        app.Begin.visible = False
-        Title.visible = False
+        Begin()
         GameOn = True
     if(Button.hits(mouseX,mouseY) and GameOn ==True):
         Coinflip() 
+    if(MultiButton.hits(mouseX,mouseY) ):
+        MultiFlip(10)
         
         
 
@@ -65,13 +54,33 @@ def Coinflip():
         NumberTails.value +=1
     print(Answer)
     
-def onStep():
-    
-    pass
+def MultiFlip(numFlips):
+    for flip in range(numFlips):
+        Answer =randrange(1,3)
+        
+        if(Answer ==1):
+            NumberHeads.value+=1
+            
+        else:
+            NumberTails.value+=1
+            
+    if(NumberHeads.value>NumberTails.value):
+        Head.visible = True
+        Tails.visible = False
+    else:
+        Head.visible = False
+        Tails.visible = True
+        
 
-def onAppstart(app):
-    Begin()
 
 def Begin():
-    Coin.visible=False
-        
+    
+    Coin.visible=True
+    Button.visible=True
+    Tally.visible = True
+    NumberHeads.visible = True
+    NumberTails.visible=True
+    app.Begin.visible = False
+    Title.visible = False
+    MultiButton.visible=True
+    
